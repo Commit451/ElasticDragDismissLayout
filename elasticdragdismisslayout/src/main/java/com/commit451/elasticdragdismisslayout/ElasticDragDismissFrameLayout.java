@@ -19,10 +19,13 @@ package com.commit451.elasticdragdismisslayout;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +75,14 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.ElasticDragDismissFrameLayout, 0, 0);
 
+        boolean checkParent = true;
+        if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_ignoreNestedScrollWarnings)) {
+            checkParent = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_ignoreNestedScrollWarnings, false);
+        }
+        if (checkParent) {
+            checkParent();
+        }
+
         if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissDistance)) {
             dragDismissDistance = a.getDimensionPixelSize(R.styleable
                     .ElasticDragDismissFrameLayout_dragDismissDistance, 0);
@@ -89,6 +100,21 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
                     dragElacticity);
         }
         a.recycle();
+    }
+
+    private void checkParent() {
+        if (getParent() instanceof NestedScrollView) {
+            if (((NestedScrollView) getParent()).isNestedScrollingEnabled()) {
+                throw new IllegalStateException("You need to set nestedScrollingEnabled on the NestedScrollView");
+            }
+        } else if (getParent() instanceof ScrollView) {
+            if (Build.VERSION.SDK_INT >= 21) {
+                if (!((ScrollView) getParent()).isNestedScrollingEnabled()) {
+                    throw new IllegalStateException("You need to set nestedScrollingEnabled on the ScrollView");
+
+                }
+            }
+        }
     }
 
     public interface ElasticDragDismissListener {

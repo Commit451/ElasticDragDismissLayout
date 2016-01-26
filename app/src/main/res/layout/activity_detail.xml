@@ -7,18 +7,15 @@
     app:dragDismissDistance="@dimen/drag_dismiss_distance"
     app:dragDismissScale="0.95">
     
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="true">
-
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,9 +58,6 @@
         android:text="This is a detail page"
         android:textSize="100sp"/>
     </LinearLayout>
-    </ScrollView>
-
-
-
+    </android.support.v4.widget.NestedScrollView>
 
 </com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout>

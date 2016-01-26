@@ -22,6 +22,7 @@
         <attr name="dragDismissFraction" format="float" />
         <attr name="dragDismissScale" format="float" />
         <attr name="dragElasticity" format="float" />
+        <attr name="ignoreNestedScrollWarnings" format="boolean" />
     </declare-styleable>
 
 </resources>
