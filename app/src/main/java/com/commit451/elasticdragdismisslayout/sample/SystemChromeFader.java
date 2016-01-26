@@ -1,15 +1,17 @@
 package com.commit451.elasticdragdismisslayout.sample;
 
+import android.annotation.TargetApi;
 import android.view.Window;
 
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
 
 /**
- * An {@link com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout.ElasticDragDismissListener} which fades system chrome (i.e. status bar and
+ * An {@link com.commit451.elasticdragdismisslayout.ElasticDragDismissListener} which fades system chrome (i.e. status bar and
  * navigation bar) when elastic drags are performed. Consuming classes must provide the
- * implementation for {@link com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout.ElasticDragDismissListener#onDragDismissed()}.
+ * implementation for {@link com.commit451.elasticdragdismisslayout.ElasticDragDismissListener#onDragDismissed()}.
  */
-public abstract class SystemChromeFader implements ElasticDragDismissFrameLayout.ElasticDragDismissListener {
+@TargetApi(21)
+public class SystemChromeFader implements ElasticDragDismissListener {
 
     private Window window;
 
@@ -37,5 +39,5 @@ public abstract class SystemChromeFader implements ElasticDragDismissFrameLayout
         }
     }
 
-    public abstract void onDragDismissed();
+    public void onDragDismissed(){};
 }

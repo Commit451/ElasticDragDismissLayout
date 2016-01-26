@@ -2,6 +2,7 @@ package com.commit451.elasticdragdismisslayout.sample;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,21 +50,31 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
         CountriesAdapter adapter = new CountriesAdapter(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDragFrameLayout.addListener(
-            new SystemChromeFader(getWindow()) {
-                @Override
-                public void onDragDismissed() {
-                    // if we drag dismiss downward then the default reversal of the enter
-                    // transition would slide content upward which looks weird. So reverse it.
-                    if (mDragFrameLayout.getTranslationY() > 0) {
-                        //TODO
-    //                            getWindow().setReturnTransition(
-    //                                    TransitionInflater.from(AboutActivity.this)
-    //                                            .inflateTransition(R.transition.about_return_downward));
-                    }
-                    finishAfterTransition();
+        mDragFrameLayout.addListener(new ElasticDragDismissListener() {
+            @Override
+            public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {
+            }
+
+            @Override
+            public void onDragDismissed() {
+                // if we drag dismiss downward then the default reversal of the enter
+                // transition would slide content upward which looks weird. So reverse it.
+                if (mDragFrameLayout.getTranslationY() > 0) {
+                    //TODO
+                    //                            getWindow().setReturnTransition(
+                    //                                    TransitionInflater.from(AboutActivity.this)
+                    //                                            .inflateTransition(R.transition.about_return_downward));
                 }
-            });
+                if (Build.VERSION.SDK_INT >= 21) {
+                    finishAfterTransition();
+                } else {
+                    finish();
+                }
+            }
+        });
+        if (Build.VERSION.SDK_INT >= 21) {
+            mDragFrameLayout.addListener(new SystemChromeFader(getWindow()));
+        }
     }
 
     static class CountriesAdapter extends RecyclerView.Adapter<CountriesViewHolder> {

@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.v4.view.NestedScrollingParent;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
@@ -36,7 +37,7 @@ import java.util.List;
  * Applies an elasticity factor to reduce movement as you approach the given dismiss distance.
  * Optionally also scales down content during drag.
  */
-public class ElasticDragDismissFrameLayout extends FrameLayout {
+public class ElasticDragDismissFrameLayout extends FrameLayout implements NestedScrollingParent {
 
     // configurable attribs
     private float dragDismissDistance = Float.MAX_VALUE;
@@ -53,11 +54,11 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
     private List<ElasticDragDismissListener> listeners;
 
     public ElasticDragDismissFrameLayout(Context context) {
-        this(context, null, 0, 0);
+        this(context, null, 0);
     }
 
     public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, 0, 0);
+        this(context, attrs, 0);
     }
 
     public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -117,32 +118,10 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
         }
     }
 
-    public interface ElasticDragDismissListener {
-
-        /**
-         * Called for each drag event.
-         *
-         * @param elasticOffset       Indicating the drag offset with elasticity applied i.e. may
-         *                            exceed 1.
-         * @param elasticOffsetPixels The elastically scaled drag distance in pixels.
-         * @param rawOffset           Value from [0, 1] indicating the raw drag offset i.e.
-         *                            without elasticity applied. A value of 1 indicates that the
-         *                            dismiss distance has been reached.
-         * @param rawOffsetPixels     The raw distance the user has dragged
-         */
-        void onDrag(float elasticOffset, float elasticOffsetPixels,
-                    float rawOffset, float rawOffsetPixels);
-
-        /**
-         * Called when dragging is released and has exceeded the threshold dismiss distance.
-         */
-        void onDragDismissed();
-
-    }
 
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
-        return (nestedScrollAxes & View.SCROLL_AXIS_VERTICAL) != 0;
+        return (nestedScrollAxes & NestedScrollView.SCROLL_AXIS_VERTICAL) != 0;
     }
 
     @Override
@@ -177,6 +156,26 @@ public class ElasticDragDismissFrameLayout extends FrameLayout {
             draggingDown = draggingUp = false;
             dispatchDragCallback(0f, 0f, 0f, 0f);
         }
+    }
+
+    @Override
+    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) {
+
+    }
+
+    @Override
+    public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
+        return false;
+    }
+
+    @Override
+    public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+        return false;
+    }
+
+    @Override
+    public int getNestedScrollAxes() {
+        return 0;
     }
 
     @Override
