@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity" android:theme="@style/AppTheme.Translucent"/>
+        <activity android:name=".DetailRecyclerViewActivity" android:theme="@style/AppTheme.Translucent" />
     </application>
 
 </manifest>

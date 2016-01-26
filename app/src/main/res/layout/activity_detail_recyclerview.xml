@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#993F51B5" />
+
+    <com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout
+        android:id="@+id/draggable_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dragDismissDistance="@dimen/drag_dismiss_distance"
+        app:dragDismissScale="0.95">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout>
+
+</LinearLayout>
