@@ -1,0 +1,16 @@
+<com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/draggable_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:dragDismissDistance="@dimen/drag_dismiss_distance"
+    app:dragDismissScale="0.95">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is a detail page" />
+
+
+</com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout>
