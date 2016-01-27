@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ElasticDragDismissLayout</string>
 
+    <string name="recyclerview">RecyclerView Example</string>
     <string-array name="countries">
         <item>Afghanistan</item>
         <item>Albania</item>

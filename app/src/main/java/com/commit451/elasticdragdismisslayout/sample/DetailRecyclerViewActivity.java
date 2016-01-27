@@ -105,7 +105,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
 
         public static CountriesViewHolder inflate(ViewGroup parent) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.viewholder_item, parent, false);
+                    .inflate(R.layout.viewholder_game, parent, false);
             return new CountriesViewHolder(view);
         }
 
