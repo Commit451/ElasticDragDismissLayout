@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout;
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
 
 import butterknife.Bind;
@@ -30,7 +30,8 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
     }
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.draggable_frame) ElasticDragDismissFrameLayout mDragFrameLayout;
+    @Bind(R.id.draggable_frame)
+    ElasticDragDismissLinearLayout mDragLayout;
     @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
 
     @Override
@@ -50,7 +51,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
         CountriesAdapter adapter = new CountriesAdapter(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDragFrameLayout.addListener(new ElasticDragDismissListener() {
+        mDragLayout.addListener(new ElasticDragDismissListener() {
             @Override
             public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {
             }
@@ -59,7 +60,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
             public void onDragDismissed() {
                 // if we drag dismiss downward then the default reversal of the enter
                 // transition would slide content upward which looks weird. So reverse it.
-                if (mDragFrameLayout.getTranslationY() > 0) {
+                if (mDragLayout.getTranslationY() > 0) {
                     //TODO
                     //                            getWindow().setReturnTransition(
                     //                                    TransitionInflater.from(AboutActivity.this)
@@ -73,7 +74,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
             }
         });
         if (Build.VERSION.SDK_INT >= 21) {
-            mDragFrameLayout.addListener(new SystemChromeFader(getWindow()));
+            mDragLayout.addListener(new SystemChromeFader(getWindow()));
         }
     }
 
