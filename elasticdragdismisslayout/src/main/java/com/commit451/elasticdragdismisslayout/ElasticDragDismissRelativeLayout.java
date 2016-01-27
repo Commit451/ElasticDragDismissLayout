@@ -1,19 +1,3 @@
-/*
- * Copyright 2015 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.commit451.elasticdragdismisslayout;
 
 import android.annotation.TargetApi;
@@ -22,34 +6,30 @@ import android.content.res.TypedArray;
 import android.support.v4.view.NestedScrollingParent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.FrameLayout;
-
-
+import android.widget.RelativeLayout;
 
 /**
- * A {@link FrameLayout} which responds to nested scrolls to create drag-dismissable layouts.
- * Applies an elasticity factor to reduce movement as you approach the given dismiss distance.
- * Optionally also scales down content during drag.
+ * Like {@link ElasticDragDismissFrameLayout} but its parent is a {@link android.widget.RelativeLayout}
  */
-public class ElasticDragDismissFrameLayout extends FrameLayout implements NestedScrollingParent {
+public class ElasticDragDismissRelativeLayout extends RelativeLayout implements NestedScrollingParent {
 
     private ElasticDragDismissDelegate mDelegate;
 
-    public ElasticDragDismissFrameLayout(Context context) {
+    public ElasticDragDismissRelativeLayout(Context context) {
         this(context, null, 0);
     }
 
-    public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs) {
+    public ElasticDragDismissRelativeLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ElasticDragDismissRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     @TargetApi(21)
-    public ElasticDragDismissFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ElasticDragDismissRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
