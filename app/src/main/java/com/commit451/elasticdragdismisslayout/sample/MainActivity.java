@@ -2,24 +2,17 @@ package com.commit451.elasticdragdismisslayout.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
-import com.commit451.elasticdragdismisslayout.sample.adapter.GameAdapter;
-import com.commit451.elasticdragdismisslayout.sample.api.ApiClient;
-import com.commit451.elasticdragdismisslayout.sample.api.response.GamesResponse;
-import com.commit451.elasticdragdismisslayout.sample.model.Game;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
     ViewGroup mRoot;
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
-    GameAdapter mGameAdapter;
+    CheeseAdapter mCheeseAdapter;
 
-    private GameAdapter.Listener mGameListener = new GameAdapter.Listener() {
+    private CheeseAdapter.Listener mCheeseAdapterListener = new CheeseAdapter.Listener() {
         @Override
-        public void onGameClicked(Game game) {
-
+        public void onItemClicked(Cheese cheese) {
+            startActivity(DetailActivity.newIntent(MainActivity.this, cheese));
         }
     };
 
@@ -55,30 +48,17 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        mGameAdapter = new GameAdapter(mGameListener);
-        mRecyclerView.setAdapter(mGameAdapter);
+        mCheeseAdapter = new CheeseAdapter(MainActivity.this, mCheeseAdapterListener);
+        mRecyclerView.setAdapter(mCheeseAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         load();
     }
 
     private void load() {
-        ApiClient.instance().getGames().enqueue(new Callback<GamesResponse>() {
-            @Override
-            public void onResponse(Response<GamesResponse> response) {
-                if (!response.isSuccess()) {
-                    Snackbar.make(mRoot, "Something went wrong", Snackbar.LENGTH_SHORT)
-                            .show();
-                    return;
-                }
-                mGameAdapter.setGames(response.body().getGames());
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Log.d("MainActivity", t.toString());
-                Snackbar.make(mRoot, "Something went wrong", Snackbar.LENGTH_SHORT)
-                        .show();
-            }
-        });
+        ArrayList<Cheese> cheeses = new ArrayList<>();
+        for (int i=0; i<20; i++) {
+            cheeses.add(Cheeses.getRandomCheese());
+        }
+        mCheeseAdapter.setData(cheeses);
     }
 }

@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.view.Window;
 
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
-import com.commit451.elasticdragdismisslayout.sample.util.ColorUtils;
 
 /**
  * An {@link com.commit451.elasticdragdismisslayout.ElasticDragDismissListener} which fades system chrome (i.e. status bar and

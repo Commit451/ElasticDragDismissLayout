@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.commit451.elasticdragdismisslayout.sample.util;
+package com.commit451.elasticdragdismisslayout.sample;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;

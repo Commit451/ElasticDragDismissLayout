@@ -37,7 +37,7 @@ public class ElasticDragDismissDelegate {
         mViewGroup = viewGroup;
     }
 
-    protected void init(Context context, TypedArray a) {
+    public void init(Context context, TypedArray a) {
         if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissDistance)) {
             dragDismissDistance = a.getDimensionPixelSize(R.styleable
                     .ElasticDragDismissFrameLayout_dragDismissDistance, 0);

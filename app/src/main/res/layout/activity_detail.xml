@@ -1,10 +1,19 @@
-<com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/draggable_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
     app:dragDismissDistance="@dimen/drag_dismiss_distance"
     app:dragDismissScale="0.95">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -18,45 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:text="@string/cheese_ipsum" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is a detail page"
-                android:textSize="100sp" />
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
-</com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout>
+</com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout>
