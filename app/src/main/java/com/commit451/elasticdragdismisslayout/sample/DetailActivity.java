@@ -6,9 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
 import android.view.View;
 
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
 
 import butterknife.Bind;
@@ -30,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Bind(R.id.draggable_frame)
-    ElasticDragDismissLinearLayout mDraggableFrame;
+    ElasticDragDismissFrameLayout mDraggableFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +58,10 @@ public class DetailActivity extends AppCompatActivity {
             public void onDragDismissed() {
                 // if we drag dismiss downward then the default reversal of the enter
                 // transition would slide content upward which looks weird. So reverse it.
-                if (mDraggableFrame.getTranslationY() > 0) {
-                    //TODO
-                    //                            getWindow().setReturnTransition(
-                    //                                    TransitionInflater.from(AboutActivity.this)
-                    //                                            .inflateTransition(R.transition.about_return_downward));
+                if (mDraggableFrame.getTranslationY() > 0 && Build.VERSION.SDK_INT >= 21) {
+                    getWindow().setReturnTransition(
+                            TransitionInflater.from(DetailActivity.this)
+                                    .inflateTransition(R.transition.about_return_downward));
                 }
                 if (Build.VERSION.SDK_INT >= 21) {
                     finishAfterTransition();

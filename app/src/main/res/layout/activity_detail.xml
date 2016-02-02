@@ -1,4 +1,4 @@
-<com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout
+<com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/draggable_frame"
@@ -9,6 +9,12 @@
     app:dragDismissDistance="@dimen/drag_dismiss_distance"
     app:dragDismissScale="0.95">
 
+    <View
+        android:id="@+id/libs_list_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -17,7 +23,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,4 +44,4 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-</com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout>
+</com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout>
