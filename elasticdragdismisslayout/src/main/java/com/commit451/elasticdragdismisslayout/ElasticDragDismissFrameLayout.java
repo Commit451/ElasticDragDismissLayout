@@ -56,7 +56,6 @@ public class ElasticDragDismissFrameLayout extends FrameLayout implements Nested
 
     private void init(Context context, AttributeSet attrs) {
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ElasticDragDismissFrameLayout, 0, 0);
-        ElasticDragDismissLayoutParentChecker.checkParent(this, a);
         mDelegate = new ElasticDragDismissDelegate(this);
         mDelegate.init(context, a);
         a.recycle();
