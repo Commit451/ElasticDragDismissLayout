@@ -3,6 +3,8 @@ Standard ViewGroups which responds to nested scrolls to create drag-dismissable 
 
 [![Build Status](https://travis-ci.org/Commit451/ElasticDragDismissLayout.svg?branch=master)](https://travis-ci.org/Commit451/ElasticDragDismissLayout)
 
+![Sample Gif](http://i.imgur.com/AXvw7Ll.gif)
+
 # Gradle Dependency
 Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file:
 
