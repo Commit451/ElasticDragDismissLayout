@@ -33,7 +33,7 @@ publish {
     userOrg = 'commit451'
     groupId = 'com.commit451'
     artifactId = 'elasticdragdismisslayout'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'Standard ViewGroups which responds to nested scrolls to create drag-dismissable layouts.'
     website = 'https://github.com/Commit451/ElasticDragDismissLayout'
 }
