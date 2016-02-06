@@ -10,7 +10,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```Gradle
 dependencies {
-    compile 'com.commit451:elasticdragdismisslayout:1.0.1'
+    compile 'com.commit451:elasticdragdismisslayout:1.0.2'
 }
 ```
 
@@ -42,6 +42,20 @@ See the sample project for a full example. Within XML:
 </com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout>
 ```
 In addition, you will probably want to have your new activity have a theme that allows for transparency. See `styles.xml` for an example.
+
+To allow for dismiss:
+```java
+mDraggableFrame.addListener(new ElasticDragDismissListener() {
+        @Override
+        public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {}
+
+        @Override
+        public void onDragDismissed() {
+            //if you are targeting 21+ you might want to finish after transition
+            finish();
+        }
+    });
+```
 
 # Supported ScrollViews
 - ScrollView (if 21+ and android:nestedScrollingEnabled="true")

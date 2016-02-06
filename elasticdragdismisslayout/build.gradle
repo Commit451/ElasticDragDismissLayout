@@ -28,12 +28,12 @@ dependencies {
     compile 'com.android.support:support-v4:23.1.1'
 }
 
-// ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+// ./gradlew clean build bintrayUpload -PbintrayUser=commit451 -PbintrayKey=BINTRAY_KEY -PdryRun=false
 publish {
     userOrg = 'commit451'
     groupId = 'com.commit451'
     artifactId = 'elasticdragdismisslayout'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'Standard ViewGroups which responds to nested scrolls to create drag-dismissable layouts.'
     website = 'https://github.com/Commit451/ElasticDragDismissLayout'
 }
