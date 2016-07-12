@@ -159,7 +159,7 @@ public class ElasticDragDismissDelegate {
             return;
         }
         if (viewGroup.getParent() instanceof NestedScrollView) {
-            if (((NestedScrollView) viewGroup.getParent()).isNestedScrollingEnabled()) {
+            if (!((NestedScrollView) viewGroup.getParent()).isNestedScrollingEnabled()) {
                 throw new IllegalStateException("You need to set nestedScrollingEnabled on the NestedScrollView");
             }
         } else if (viewGroup.getParent() instanceof ScrollView) {
