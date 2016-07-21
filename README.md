@@ -3,7 +3,7 @@ Standard ViewGroups which responds to nested scrolls to create drag-dismissable 
 
 [![Build Status](https://travis-ci.org/Commit451/ElasticDragDismissLayout.svg?branch=master)](https://travis-ci.org/Commit451/ElasticDragDismissLayout) [![](https://jitpack.io/v/Commit451/ElasticDragDismissLayout.svg)](https://jitpack.io/#Commit451/ElasticDragDismissLayout)
 
-![Sample Gif](http://i.imgur.com/AXvw7Ll.gif)
+<img src="/art/sample.gif?raw=true" width="200px">
 
 # Gradle Dependency
 
