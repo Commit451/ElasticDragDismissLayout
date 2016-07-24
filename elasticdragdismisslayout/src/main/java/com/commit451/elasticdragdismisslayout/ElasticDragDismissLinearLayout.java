@@ -85,6 +85,10 @@ public class ElasticDragDismissLinearLayout extends LinearLayout implements Nest
         mDelegate.onSizeChanged(w, h, oldw, oldh);
     }
 
+    public void setEnableScaleX(boolean enableScaleX) {
+        mDelegate.setEnableScaleX(enableScaleX);
+    }
+
     public void addListener(ElasticDragDismissListener listener) {
         mDelegate.addListener(listener);
     }
