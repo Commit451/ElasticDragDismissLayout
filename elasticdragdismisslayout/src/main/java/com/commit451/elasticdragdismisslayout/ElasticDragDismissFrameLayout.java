@@ -105,10 +105,6 @@ public class ElasticDragDismissFrameLayout extends FrameLayout implements Nested
         mDelegate.onSizeChanged(w, h, oldw, oldh);
     }
 
-    public void setEnableScaleX(boolean enableScaleX) {
-        mDelegate.setEnableScaleX(enableScaleX);
-    }
-
     public void addListener(ElasticDragDismissListener listener) {
         mDelegate.addListener(listener);
     }

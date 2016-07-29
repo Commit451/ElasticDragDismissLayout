@@ -62,10 +62,9 @@ public class ElasticDragDismissDelegate {
             dragElacticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
                     dragElacticity);
         }
-    }
-
-    public void setEnableScaleX(boolean enable) {
-        this.enableScaleX = enable;
+        if(a.hasValue(R.styleable.ElasticDragDismissFrameLayout_enableScaleX)) {
+            enableScaleX = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_enableScaleX, true);
+        }
     }
 
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
