@@ -7,6 +7,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewPropertyAnimator;
 import android.widget.ScrollView;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class ElasticDragDismissDelegate {
     private float dragDismissScale = 1f;
     private boolean shouldScale = false;
     private float dragElacticity = 0.8f;
+
+    private boolean enableScaleX = true;
 
     // state
     private float totalDrag;
@@ -59,6 +62,9 @@ public class ElasticDragDismissDelegate {
             dragElacticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
                     dragElacticity);
         }
+        if(a.hasValue(R.styleable.ElasticDragDismissFrameLayout_enableScaleX)) {
+            enableScaleX = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_enableScaleX, true);
+        }
     }
 
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
@@ -81,14 +87,17 @@ public class ElasticDragDismissDelegate {
         if (Math.abs(totalDrag) >= dragDismissDistance) {
             dispatchDismissCallback();
         } else { // settle back to natural position
-            mViewGroup.animate()
+            ViewPropertyAnimator animator = mViewGroup.animate()
                     .translationY(0f)
-                    .scaleX(1f)
                     .scaleY(1f)
                     .setDuration(200L)
                     .setInterpolator(new FastOutSlowInInterpolator())
-                    .setListener(null)
-                    .start();
+                    .setListener(null);
+            if(enableScaleX)
+                animator.scaleX(1f);
+
+            animator.start();
+
             totalDrag = 0;
             draggingDown = draggingUp = false;
             dispatchDragCallback(0f, 0f, 0f, 0f);
@@ -126,7 +135,8 @@ public class ElasticDragDismissDelegate {
 
         if (shouldScale) {
             final float scale = 1 - ((1 - dragDismissScale) * dragFraction);
-            mViewGroup.setScaleX(scale);
+            if(enableScaleX)
+                mViewGroup.setScaleX(scale);
             mViewGroup.setScaleY(scale);
         }
 
@@ -137,7 +147,8 @@ public class ElasticDragDismissDelegate {
             totalDrag = dragTo = dragFraction = 0;
             draggingDown = draggingUp = false;
             mViewGroup.setTranslationY(0f);
-            mViewGroup.setScaleX(1f);
+            if(enableScaleX)
+                mViewGroup.setScaleX(1f);
             mViewGroup.setScaleY(1f);
         }
         dispatchDragCallback(dragFraction, dragTo,
