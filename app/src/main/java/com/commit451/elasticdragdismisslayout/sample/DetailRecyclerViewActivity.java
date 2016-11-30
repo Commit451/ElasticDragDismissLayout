@@ -13,10 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout;
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissCallback;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -29,10 +28,12 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
         return intent;
     }
 
-    @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.draggable_frame)
-    ElasticDragDismissLinearLayout mDragLayout;
-    @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.draggable_frame)
+    ElasticDragDismissCoordinatorLayout mDragLayout;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
         CountriesAdapter adapter = new CountriesAdapter(this);
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDragLayout.addListener(new ElasticDragDismissListener() {
+        mDragLayout.addListener(new ElasticDragDismissCallback() {
             @Override
             public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {
             }
@@ -81,6 +82,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
     static class CountriesAdapter extends RecyclerView.Adapter<CountriesViewHolder> {
 
         String[] mCountries;
+
         public CountriesAdapter(Context context) {
             mCountries = context.getResources().getStringArray(R.array.countries);
 
@@ -110,7 +112,8 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
             return new CountriesViewHolder(view);
         }
 
-        @Bind(R.id.text) TextView mText;
+        @BindView(R.id.text)
+        TextView mText;
 
         public CountriesViewHolder(View view) {
             super(view);

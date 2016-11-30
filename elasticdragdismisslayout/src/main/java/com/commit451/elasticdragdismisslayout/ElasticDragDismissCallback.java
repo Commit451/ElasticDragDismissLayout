@@ -1,9 +1,9 @@
 package com.commit451.elasticdragdismisslayout;
 
 /**
- * Listener for listening for drag events on ElasticLayouts
+ * Callbacks for listening for drag events on ElasticLayouts
  */
-public interface ElasticDragDismissListener {
+public abstract class ElasticDragDismissCallback {
 
     /**
      * Called for each drag event.
@@ -16,12 +16,14 @@ public interface ElasticDragDismissListener {
      *                            dismiss distance has been reached.
      * @param rawOffsetPixels     The raw distance the user has dragged
      */
-    void onDrag(float elasticOffset, float elasticOffsetPixels,
-                float rawOffset, float rawOffsetPixels);
+    public void onDrag(float elasticOffset, float elasticOffsetPixels,
+                       float rawOffset, float rawOffsetPixels) {
+    }
 
     /**
      * Called when dragging is released and has exceeded the threshold dismiss distance.
      */
-    void onDragDismissed();
+    public void onDragDismissed() {
+    }
 
 }

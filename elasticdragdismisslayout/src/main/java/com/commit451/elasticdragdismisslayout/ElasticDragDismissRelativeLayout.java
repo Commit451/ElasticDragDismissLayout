@@ -62,7 +62,8 @@ public class ElasticDragDismissRelativeLayout extends RelativeLayout implements 
     }
 
     @Override
-    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) { }
+    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) {
+    }
 
     @Override
     public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
@@ -85,11 +86,11 @@ public class ElasticDragDismissRelativeLayout extends RelativeLayout implements 
         mDelegate.onSizeChanged(w, h, oldw, oldh);
     }
 
-    public void addListener(ElasticDragDismissListener listener) {
+    public void addListener(ElasticDragDismissCallback listener) {
         mDelegate.addListener(listener);
     }
 
-    public void removeListener(ElasticDragDismissListener listener) {
+    public void removeListener(ElasticDragDismissCallback listener) {
         mDelegate.removeListener(listener);
     }
 }

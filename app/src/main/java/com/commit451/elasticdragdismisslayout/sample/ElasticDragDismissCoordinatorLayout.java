@@ -1,36 +1,29 @@
-package com.commit451.elasticdragdismisslayout;
+package com.commit451.elasticdragdismisslayout.sample;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.NestedScrollingParent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
 
-/**
- * Like {@link ElasticDragDismissFrameLayout} but its parent is a {@link android.widget.LinearLayout}
- */
-public class ElasticDragDismissLinearLayout extends LinearLayout implements NestedScrollingParent {
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissDelegate;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissCallback;
+
+public class ElasticDragDismissCoordinatorLayout extends CoordinatorLayout implements NestedScrollingParent {
 
     private ElasticDragDismissDelegate mDelegate;
 
-    public ElasticDragDismissLinearLayout(Context context) {
+    public ElasticDragDismissCoordinatorLayout(Context context) {
         this(context, null, 0);
     }
 
-    public ElasticDragDismissLinearLayout(Context context, AttributeSet attrs) {
+    public ElasticDragDismissCoordinatorLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ElasticDragDismissLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ElasticDragDismissCoordinatorLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
-
-    @TargetApi(21)
-    public ElasticDragDismissLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
 
@@ -43,26 +36,31 @@ public class ElasticDragDismissLinearLayout extends LinearLayout implements Nest
 
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+        super.onStartNestedScroll(child, target, nestedScrollAxes);
         return mDelegate.onStartNestedScroll(child, target, nestedScrollAxes);
     }
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        super.onNestedPreScroll(target, dx, dy, consumed);
         mDelegate.onNestedPreScroll(target, dx, dy, consumed);
     }
 
     @Override
     public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        super.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
         mDelegate.onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
     }
 
     @Override
     public void onStopNestedScroll(View child) {
+        super.onStopNestedScroll(child);
         mDelegate.onStopNestedScroll(child);
     }
 
     @Override
     public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) {
+        super.onNestedScrollAccepted(child, target, nestedScrollAxes);
     }
 
     @Override
@@ -72,6 +70,7 @@ public class ElasticDragDismissLinearLayout extends LinearLayout implements Nest
 
     @Override
     public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+        super.onNestedPreFling(target, velocityX, velocityY);
         return false;
     }
 

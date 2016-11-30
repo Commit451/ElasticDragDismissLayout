@@ -24,8 +24,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-
-
 /**
  * A {@link FrameLayout} which responds to nested scrolls to create drag-dismissable layouts.
  * Applies an elasticity factor to reduce movement as you approach the given dismiss distance.
@@ -82,7 +80,8 @@ public class ElasticDragDismissFrameLayout extends FrameLayout implements Nested
     }
 
     @Override
-    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) { }
+    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) {
+    }
 
     @Override
     public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
@@ -105,11 +104,11 @@ public class ElasticDragDismissFrameLayout extends FrameLayout implements Nested
         mDelegate.onSizeChanged(w, h, oldw, oldh);
     }
 
-    public void addListener(ElasticDragDismissListener listener) {
+    public void addListener(ElasticDragDismissCallback listener) {
         mDelegate.addListener(listener);
     }
 
-    public void removeListener(ElasticDragDismissListener listener) {
+    public void removeListener(ElasticDragDismissCallback listener) {
         mDelegate.removeListener(listener);
     }
 }

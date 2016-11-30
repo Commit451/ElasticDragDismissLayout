@@ -2,13 +2,10 @@ package com.commit451.elasticdragdismisslayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
-import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,7 @@ import java.util.List;
 public class ElasticDragDismissDelegate {
 
     //copied from View in API 21
-    public static final int SCROLL_AXIS_VERTICAL = 1 << 1;
+    private static final int SCROLL_AXIS_VERTICAL = 1 << 1;
 
     // configurable attribs
     private float dragDismissDistance = Float.MAX_VALUE;
@@ -36,7 +33,7 @@ public class ElasticDragDismissDelegate {
     private boolean draggingDown = false;
     private boolean draggingUp = false;
 
-    private List<ElasticDragDismissListener> listeners;
+    private List<ElasticDragDismissCallback> callbacks;
     private ViewGroup mViewGroup;
 
     public ElasticDragDismissDelegate(ViewGroup viewGroup) {
@@ -44,7 +41,7 @@ public class ElasticDragDismissDelegate {
     }
 
     public void init(Context context, TypedArray a) {
-        checkParent(mViewGroup, a);
+        Util.checkParent(mViewGroup, a);
 
         if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissDistance)) {
             dragDismissDistance = a.getDimensionPixelSize(R.styleable
@@ -62,7 +59,7 @@ public class ElasticDragDismissDelegate {
             dragElacticity = a.getFloat(R.styleable.ElasticDragDismissFrameLayout_dragElasticity,
                     dragElacticity);
         }
-        if(a.hasValue(R.styleable.ElasticDragDismissFrameLayout_enableScaleX)) {
+        if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_enableScaleX)) {
             enableScaleX = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_enableScaleX, true);
         }
     }
@@ -93,8 +90,9 @@ public class ElasticDragDismissDelegate {
                     .setDuration(200L)
                     .setInterpolator(new FastOutSlowInInterpolator())
                     .setListener(null);
-            if(enableScaleX)
+            if (enableScaleX) {
                 animator.scaleX(1f);
+            }
 
             animator.start();
 
@@ -135,8 +133,9 @@ public class ElasticDragDismissDelegate {
 
         if (shouldScale) {
             final float scale = 1 - ((1 - dragDismissScale) * dragFraction);
-            if(enableScaleX)
+            if (enableScaleX) {
                 mViewGroup.setScaleX(scale);
+            }
             mViewGroup.setScaleY(scale);
         }
 
@@ -147,8 +146,9 @@ public class ElasticDragDismissDelegate {
             totalDrag = dragTo = dragFraction = 0;
             draggingDown = draggingUp = false;
             mViewGroup.setTranslationY(0f);
-            if(enableScaleX)
+            if (enableScaleX) {
                 mViewGroup.setScaleX(1f);
+            }
             mViewGroup.setScaleY(1f);
         }
         dispatchDragCallback(dragFraction, dragTo,
@@ -161,56 +161,34 @@ public class ElasticDragDismissDelegate {
         }
     }
 
-    protected void checkParent(ViewGroup viewGroup, TypedArray a) {
-        boolean checkParent = true;
-        if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_ignoreNestedScrollWarnings)) {
-            checkParent = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_ignoreNestedScrollWarnings, false);
-        }
-        if (!checkParent) {
-            return;
-        }
-        if (viewGroup.getParent() instanceof NestedScrollView) {
-            if (!((NestedScrollView) viewGroup.getParent()).isNestedScrollingEnabled()) {
-                throw new IllegalStateException("You need to set nestedScrollingEnabled on the NestedScrollView");
-            }
-        } else if (viewGroup.getParent() instanceof ScrollView) {
-            if (Build.VERSION.SDK_INT >= 21) {
-                if (!((ScrollView) viewGroup.getParent()).isNestedScrollingEnabled()) {
-                    throw new IllegalStateException("You need to set nestedScrollingEnabled on the ScrollView");
-
-                }
-            }
-        }
-    }
-
     private void dispatchDragCallback(float elasticOffset, float elasticOffsetPixels,
                                       float rawOffset, float rawOffsetPixels) {
-        if (listeners != null && listeners.size() > 0) {
-            for (ElasticDragDismissListener listener : listeners) {
-                listener.onDrag(elasticOffset, elasticOffsetPixels,
+        if (callbacks != null && !callbacks.isEmpty()) {
+            for (ElasticDragDismissCallback callback : callbacks) {
+                callback.onDrag(elasticOffset, elasticOffsetPixels,
                         rawOffset, rawOffsetPixels);
             }
         }
     }
 
     private void dispatchDismissCallback() {
-        if (listeners != null && listeners.size() > 0) {
-            for (ElasticDragDismissListener listener : listeners) {
-                listener.onDragDismissed();
+        if (callbacks != null && !callbacks.isEmpty()) {
+            for (ElasticDragDismissCallback callback : callbacks) {
+                callback.onDragDismissed();
             }
         }
     }
 
-    public void addListener(ElasticDragDismissListener listener) {
-        if (listeners == null) {
-            listeners = new ArrayList<>();
+    public void addListener(ElasticDragDismissCallback listener) {
+        if (callbacks == null) {
+            callbacks = new ArrayList<>();
         }
-        listeners.add(listener);
+        callbacks.add(listener);
     }
 
-    public void removeListener(ElasticDragDismissListener listener) {
-        if (listeners != null && listeners.size() > 0) {
-            listeners.remove(listener);
+    public void removeListener(ElasticDragDismissCallback listener) {
+        if (callbacks != null && callbacks.size() > 0) {
+            callbacks.remove(listener);
         }
     }
 }

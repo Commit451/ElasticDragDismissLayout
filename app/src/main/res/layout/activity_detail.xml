@@ -1,4 +1,4 @@
-<com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout
+<com.commit451.elasticdragdismisslayout.sample.ElasticDragDismissCoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/draggable_frame"
@@ -44,4 +44,4 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-</com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout>
+</com.commit451.elasticdragdismisslayout.sample.ElasticDragDismissCoordinatorLayout>

@@ -9,10 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
 import android.view.View;
 
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
-import com.commit451.elasticdragdismisslayout.ElasticDragDismissListener;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissCallback;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -28,10 +27,10 @@ public class DetailActivity extends AppCompatActivity {
         return intent;
     }
 
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @Bind(R.id.draggable_frame)
-    ElasticDragDismissFrameLayout mDraggableFrame;
+    @BindView(R.id.draggable_frame)
+    ElasticDragDismissCoordinatorLayout mDraggableFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         });
         mToolbar.setTitle(cheese.getName());
 
-        mDraggableFrame.addListener(new ElasticDragDismissListener() {
+        mDraggableFrame.addListener(new ElasticDragDismissCallback() {
             @Override
             public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {}
 

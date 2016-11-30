@@ -11,15 +11,18 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.root)
+    @BindView(R.id.root)
     ViewGroup mRoot;
-    @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.recyclerview) RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
     CheeseAdapter mCheeseAdapter;
 
     private CheeseAdapter.Listener mCheeseAdapterListener = new CheeseAdapter.Listener() {
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void load() {
         ArrayList<Cheese> cheeses = new ArrayList<>();
-        for (int i=0; i<20; i++) {
+        for (int i = 0; i < 20; i++) {
             cheeses.add(Cheeses.getRandomCheese());
         }
         mCheeseAdapter.setData(cheeses);
