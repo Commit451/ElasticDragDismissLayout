@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissCallback;
+import com.commit451.elasticdragdismisslayout.ElasticDragDismissLinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.draggable_frame)
-    ElasticDragDismissCoordinatorLayout mDragLayout;
+    ElasticDragDismissLinearLayout mDragLayout;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
 
@@ -75,7 +76,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
             }
         });
         if (Build.VERSION.SDK_INT >= 21) {
-            mDragLayout.addListener(new SystemChromeFader(getWindow()));
+            mDragLayout.addListener(new SystemChromeFader(this));
         }
     }
 

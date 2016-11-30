@@ -70,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
         if (Build.VERSION.SDK_INT >= 21) {
-            mDraggableFrame.addListener(new SystemChromeFader(getWindow()));
+            mDraggableFrame.addListener(new SystemChromeFader(this));
         }
     }
 }
