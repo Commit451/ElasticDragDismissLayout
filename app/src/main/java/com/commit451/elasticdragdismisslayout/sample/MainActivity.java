@@ -7,7 +7,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -16,30 +15,21 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.root)
-    ViewGroup mRoot;
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
     @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
 
-    CheeseAdapter mCheeseAdapter;
-
-    private CheeseAdapter.Listener mCheeseAdapterListener = new CheeseAdapter.Listener() {
-        @Override
-        public void onItemClicked(Cheese cheese) {
-            startActivity(DetailActivity.newIntent(MainActivity.this, cheese));
-        }
-    };
+    CheeseAdapter cheeseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mToolbar.setTitle("ElasticDragDismissLayout");
-        mToolbar.inflateMenu(R.menu.main);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        toolbar.setTitle("ElasticDragDismissLayout");
+        toolbar.inflateMenu(R.menu.main);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
@@ -51,9 +41,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        mCheeseAdapter = new CheeseAdapter(MainActivity.this, mCheeseAdapterListener);
-        mRecyclerView.setAdapter(mCheeseAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        cheeseAdapter = new CheeseAdapter(MainActivity.this, new CheeseAdapter.Listener() {
+            @Override
+            public void onItemClicked(Cheese cheese) {
+                startActivity(DetailActivity.newIntent(MainActivity.this, cheese));
+            }
+        });
+        recyclerView.setAdapter(cheeseAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         load();
     }
 
@@ -62,6 +57,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             cheeses.add(Cheeses.getRandomCheese());
         }
-        mCheeseAdapter.setData(cheeses);
+        cheeseAdapter.setData(cheeses);
     }
 }

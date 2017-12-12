@@ -30,20 +30,20 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
     }
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
     @BindView(R.id.draggable_frame)
-    ElasticDragDismissLinearLayout mDragLayout;
+    ElasticDragDismissLinearLayout dragLayout;
     @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_recyclerview);
         ButterKnife.bind(this);
-        mToolbar.setTitle("Countries");
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setTitle("Countries");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -51,9 +51,9 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
         });
 
         CountriesAdapter adapter = new CountriesAdapter(this);
-        mRecyclerView.setAdapter(adapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDragLayout.addListener(new ElasticDragDismissCallback() {
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        dragLayout.addListener(new ElasticDragDismissCallback() {
             @Override
             public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {
             }
@@ -62,7 +62,7 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
             public void onDragDismissed() {
                 // if we drag dismiss downward then the default reversal of the enter
                 // transition would slide content upward which looks weird. So reverse it.
-                if (mDragLayout.getTranslationY() > 0) {
+                if (dragLayout.getTranslationY() > 0) {
                     //TODO
                     //                            getWindow().setReturnTransition(
                     //                                    TransitionInflater.from(AboutActivity.this)
@@ -76,16 +76,16 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
             }
         });
         if (Build.VERSION.SDK_INT >= 21) {
-            mDragLayout.addListener(new SystemChromeFader(this));
+            dragLayout.addListener(new SystemChromeFader(this));
         }
     }
 
     static class CountriesAdapter extends RecyclerView.Adapter<CountriesViewHolder> {
 
-        String[] mCountries;
+        String[] countries;
 
         public CountriesAdapter(Context context) {
-            mCountries = context.getResources().getStringArray(R.array.countries);
+            countries = context.getResources().getStringArray(R.array.countries);
 
         }
 
@@ -96,12 +96,12 @@ public class DetailRecyclerViewActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(CountriesViewHolder holder, int position) {
-            holder.bind(mCountries[position]);
+            holder.bind(countries[position]);
         }
 
         @Override
         public int getItemCount() {
-            return mCountries.length;
+            return countries.length;
         }
     }
 

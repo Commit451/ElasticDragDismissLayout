@@ -21,7 +21,7 @@ allprojects {
 Then, add the library to your project `build.gradle`
 ```gradle
 dependencies {
-    compile 'com.github.Commit451:ElasticDragDismissLayout:1.0.4'
+    implementation 'com.github.Commit451:ElasticDragDismissLayout:1.0.4'
 }
 ```
 
@@ -84,7 +84,7 @@ License
 --------
 
     Copyright 2015 Google, Inc.
-    Copyright 2016 Commit 451
+    Copyright 2017 Commit 451
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
