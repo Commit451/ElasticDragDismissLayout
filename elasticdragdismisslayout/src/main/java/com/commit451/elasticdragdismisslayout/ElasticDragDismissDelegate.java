@@ -19,12 +19,15 @@ public class ElasticDragDismissDelegate {
     //copied from View in API 21
     private static final int SCROLL_AXIS_VERTICAL = 1 << 1;
 
+    private static final long DRAG_DURATION_BUFFER = 150L;
+
     // configurable attribs
     private float dragDismissDistance = Float.MAX_VALUE;
     private float dragDismissFraction = -1f;
     private float dragDismissScale = 1f;
     private boolean shouldScale = false;
     private float dragElacticity = 0.8f;
+    private long scrollStartTimestamp;
 
     private boolean enableScaleX = true;
 
@@ -65,6 +68,7 @@ public class ElasticDragDismissDelegate {
     }
 
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+        scrollStartTimestamp = System.currentTimeMillis();
         return (nestedScrollAxes & SCROLL_AXIS_VERTICAL) != 0;
     }
 
@@ -81,7 +85,9 @@ public class ElasticDragDismissDelegate {
     }
 
     public void onStopNestedScroll(View child) {
-        if (Math.abs(totalDrag) >= dragDismissDistance) {
+        // if the drag is too fast it probably was not an intentional drag but a fling, don't dismiss
+        final long dragTime = System.currentTimeMillis() - scrollStartTimestamp;
+        if (Math.abs(totalDrag) >= dragDismissDistance && dragTime > DRAG_DURATION_BUFFER) {
             dispatchDismissCallback();
         } else { // settle back to natural position
             ViewPropertyAnimator animator = mViewGroup.animate()
