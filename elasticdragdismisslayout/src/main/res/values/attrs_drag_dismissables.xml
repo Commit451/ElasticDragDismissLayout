@@ -21,6 +21,7 @@
         <attr name="dragDismissDistance" format="dimension" />
         <attr name="dragDismissFraction" format="float" />
         <attr name="dragDismissScale" format="float" />
+        <attr name="dragDismissEnableBottomDrag" format="boolean" />
         <attr name="dragElasticity" format="float" />
         <attr name="ignoreNestedScrollWarnings" format="boolean" />
         <attr name="enableScaleX" format="boolean" />

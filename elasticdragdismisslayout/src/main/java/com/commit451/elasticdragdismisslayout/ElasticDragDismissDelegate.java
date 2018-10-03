@@ -31,6 +31,8 @@ public class ElasticDragDismissDelegate {
 
     private boolean enableScaleX = true;
 
+    private boolean enableBottomDrag = false;
+
     // state
     private float totalDrag;
     private boolean draggingDown = false;
@@ -65,6 +67,9 @@ public class ElasticDragDismissDelegate {
         if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_enableScaleX)) {
             enableScaleX = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_enableScaleX, true);
         }
+        if (a.hasValue(R.styleable.ElasticDragDismissFrameLayout_dragDismissEnableBottomDrag)) {
+            enableBottomDrag = a.getBoolean(R.styleable.ElasticDragDismissFrameLayout_dragDismissEnableBottomDrag, true);
+        }
     }
 
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
@@ -77,6 +82,7 @@ public class ElasticDragDismissDelegate {
         if (draggingDown && dy > 0 || draggingUp && dy < 0) {
             dragScale(dy);
             consumed[1] = dy;
+
         }
     }
 
@@ -109,9 +115,10 @@ public class ElasticDragDismissDelegate {
     }
 
     private void dragScale(int scroll) {
+        boolean draggingUp = enableBottomDrag && this.draggingUp;
         if (scroll == 0) return;
-
-        totalDrag += scroll;
+        if (draggingUp || scroll < 0)
+         totalDrag += scroll;
 
         // track the direction & set the pivot point for scaling
         // don't double track i.e. if start dragging down and then reverse, keep tracking as
@@ -120,7 +127,7 @@ public class ElasticDragDismissDelegate {
             draggingDown = true;
             if (shouldScale) mViewGroup.setPivotY(mViewGroup.getHeight());
         } else if (scroll > 0 && !draggingDown && !draggingUp) {
-            draggingUp = true;
+            this.draggingUp = true;
             if (shouldScale) mViewGroup.setPivotY(0f);
         }
         // how far have we dragged relative to the distance to perform a dismiss
@@ -150,7 +157,7 @@ public class ElasticDragDismissDelegate {
         if ((draggingDown && totalDrag >= 0)
                 || (draggingUp && totalDrag <= 0)) {
             totalDrag = dragTo = dragFraction = 0;
-            draggingDown = draggingUp = false;
+            draggingDown = this.draggingUp = false;
             mViewGroup.setTranslationY(0f);
             if (enableScaleX) {
                 mViewGroup.setScaleX(1f);

@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:background="@android:color/white"
     app:dragDismissDistance="@dimen/drag_dismiss_distance"
-    app:dragDismissScale="0.95" >
+    app:dragDismissScale="0.95"
+    app:dragDismissEnableBottomDrag="true">
 
     <View
         android:id="@+id/libs_list_background"
