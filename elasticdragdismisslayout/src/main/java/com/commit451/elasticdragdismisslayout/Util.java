@@ -2,9 +2,10 @@ package com.commit451.elasticdragdismisslayout;
 
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.v4.widget.NestedScrollView;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
+
+import androidx.core.widget.NestedScrollView;
 
 class Util {
 

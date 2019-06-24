@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    api 'com.android.support:support-v4:27.0.2'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/Commit451/gradle-android-javadocs/1.0.0/gradle-android-javadocs.gradle'
