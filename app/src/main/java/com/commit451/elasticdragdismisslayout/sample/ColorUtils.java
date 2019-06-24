@@ -16,16 +16,17 @@
 
 package com.commit451.elasticdragdismisslayout.sample;
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
 
 /**
  * Utility methods for working with colors.
  */
 public class ColorUtils {
 
-    private ColorUtils() { }
+    private ColorUtils() {
+    }
 
     /**
      * Set the alpha component of {@code color} to be {@code alpha}.
