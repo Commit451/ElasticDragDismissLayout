@@ -2,10 +2,11 @@ package com.commit451.elasticdragdismisslayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
+
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +119,7 @@ public class ElasticDragDismissDelegate {
         boolean draggingUp = enableBottomDrag && this.draggingUp;
         if (scroll == 0) return;
         if (draggingUp || scroll < 0)
-         totalDrag += scroll;
+            totalDrag += scroll;
 
         // track the direction & set the pivot point for scaling
         // don't double track i.e. if start dragging down and then reverse, keep tracking as

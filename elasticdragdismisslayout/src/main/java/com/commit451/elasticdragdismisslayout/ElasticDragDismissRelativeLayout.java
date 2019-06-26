@@ -3,11 +3,12 @@ package com.commit451.elasticdragdismisslayout;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.v4.view.NestedScrollingParent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.NestedScrollingParent;
 
 /**
  * Like {@link ElasticDragDismissFrameLayout} but its parent is a {@link android.widget.RelativeLayout}

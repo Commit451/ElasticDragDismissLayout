@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissCallback;
 import com.commit451.elasticdragdismisslayout.ElasticDragDismissFrameLayout;
@@ -52,7 +53,8 @@ public class DetailActivity extends AppCompatActivity {
 
         draggableFrame.addListener(new ElasticDragDismissCallback() {
             @Override
-            public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {}
+            public void onDrag(float elasticOffset, float elasticOffsetPixels, float rawOffset, float rawOffsetPixels) {
+            }
 
             @Override
             public void onDragDismissed() {
